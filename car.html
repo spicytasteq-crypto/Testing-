@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irsyad Drive — Drive Malaysia. Effortlessly.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            white: '#ffffff',
+                            gray: '#f5f5f7',
+                            dark: '#1d1d1f',
+                            muted: '#86868b',
+                            blue: '#0071e3',
+                            blueHover: '#0077ed',
+                        }
+                    },
+                    fontFamily: {
+                        sans: [
+                            '-apple-system',
+                            'BlinkMacSystemFont',
+                            '"SF Pro Display"',
+                            '"SF Pro Text"',
+                            '"Inter"',
+                            'sans-serif'
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Apple-inspired refinements */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+            background-color: #ffffff;
+            color: #1d1d1f;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .frosted-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        .apple-card {
+            transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .apple-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Subtle modal fade-in */
+        .modal-enter {
+            animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-apple-white text-apple-dark selection:bg-apple-blue selection:text-white">
+
+    <!-- Sticky Frosted-Glass Navigation -->
+    <header class="sticky top-0 z-40 frosted-nav border-b border-black/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-2 text-lg font-semibold tracking-tight text-apple-dark">
+                    <svg class="w-5 h-5 text-apple-dark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                    </svg>
+                    <span>Irsyad.</span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-xs font-medium text-apple-dark/80">
+                    <a href="#fleet" class="hover:text-apple-dark transition-colors">Fleet</a>
+                    <a href="#locations" class="hover:text-apple-dark transition-colors">Locations</a>
+                    <a href="#why-us" class="hover:text-apple-dark transition-colors">Why Us</a>
+                    <a href="#support" class="hover:text-apple-dark transition-colors">Support</a>
+                </nav>
+
+                <!-- Primary Action & Mobile Menu Button -->
+                <div class="flex items-center gap-3">
+                    <a href="#quick-book" class="inline-flex items-center justify-center px-4 py-1.5 text-xs font-medium text-white bg-apple-blue hover:bg-apple-blueHover rounded-full transition-colors">
+                        Book Now
+                    </a>
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-apple-dark hover:bg-apple-gray transition-colors" aria-label="Toggle Menu">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Dropdown Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4 pt-2 border-t border-black/5 space-y-2 text-sm font-medium">
+                <a href="#fleet" class="block px-2 py-1.5 rounded-lg hover:bg-apple-gray">Fleet</a>
+                <a href="#locations" class="block px-2 py-1.5 rounded-lg hover:bg-apple-gray">Locations</a>
+                <a href="#why-us" class="block px-2 py-1.5 rounded-lg hover:bg-apple-gray">Why Us</a>
+                <a href="#support" class="block px-2 py-1.5 rounded-lg hover:bg-apple-gray">Support</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-16 pb-12 sm:pt-24 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center">
+        <p class="text-xs sm:text-sm font-semibold uppercase tracking-widest text-apple-blue mb-3">
+            Irsyad Drive Malaysia
+        </p>
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-apple-dark leading-[1.05] max-w-4xl mx-auto">
+            Drive Malaysia. Effortlessly.
+        </h1>
+        <p class="mt-5 text-lg sm:text-xl text-apple-muted max-w-2xl mx-auto font-normal leading-relaxed">
+            Seamless car rentals across KLIA, Penang, Johor Bahru, and Langkawi. Zero hidden fees, Touch 'n Go RFID ready, and instant digital keys.
+        </p>
+
+        <!-- Hero CTAs -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a href="#fleet" class="px-7 py-3 text-sm sm:text-base font-medium text-white bg-apple-blue hover:bg-apple-blueHover rounded-full transition-colors shadow-sm">
+                Explore Fleet
+            </a>
+            <a href="#why-us" class="px-7 py-3 text-sm sm:text-base font-medium text-apple-blue hover:bg-apple-gray rounded-full transition-colors">
+                Learn more &rsaquo;
+            </a>
+        </div>
+
+        <!-- Sleek High-Contrast Vehicle Showcase -->
+        <div class="mt-12 sm:mt-16 relative rounded-3xl overflow-hidden bg-apple-dark text-white shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+                <div class="lg:col-span-5 p-8 sm:p-12 text-left">
+                    <span class="inline-block px-3 py-1 text-xs font-medium bg-white/10 text-white rounded-full mb-4">
+                        Featured Electric
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Tesla Model 3</h2>
+                    <p class="mt-2 text-sm sm:text-base text-white/70">
+                        Silent, zero-emission cruising from Kuala Lumpur to Penang with Supercharger access included.
+                    </p>
+                    <div class="mt-6 flex items-baseline gap-2">
+                        <span class="text-2xl font-semibold">RM 480</span>
+                        <span class="text-sm text-white/60">/ day</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 relative h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-neutral-800 to-neutral-950 flex items-center justify-center p-6">
+                    <img
+                        src="https://placehold.co/900x500/1d1d1f/ffffff?text=Tesla+Model+3+—+Irsyad+Drive"
+                        alt="Tesla Model 3"
+                        class="w-full h-full object-cover rounded-2xl opacity-95"
+                        onerror="this.src='https://placehold.co/900x500/1d1d1f/ffffff?text=Irsyad+Drive+Flagship+EV'"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Quick-Book Bar -->
+    <section id="quick-book" class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto -mt-4 relative z-20">
+        <div class="bg-apple-gray/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-black/5">
+            <form id="quickBookForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <!-- Pick-up Location -->
+                <div>
+                    <label for="pickupLocation" class="block text-xs font-medium text-apple-muted mb-1.5 ml-1">
+                        Pick-up Location
+                    </label>
+                    <select id="pickupLocation" class="w-full bg-white text-apple-dark text-sm font-medium rounded-2xl px-4 py-3 border border-black/10 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                        <option value="KLIA / KLIA2">KLIA / KLIA2</option>
+                        <option value="Kuala Lumpur (KL Sentral)">Kuala Lumpur (KL Sentral)</option>
+                        <option value="Klang / Cyberjaya">Klang / Cyberjaya</option>
+                        <option value="Penang International Airport">Penang International Airport</option>
+                        <option value="Johor Bahru">Johor Bahru</option>
+                    </select>
+                </div>
+
+                <!-- Pick-up Date -->
+                <div>
+                    <label for="pickupDate" class="block text-xs font-medium text-apple-muted mb-1.5 ml-1">
+                        Pick-up Date
+                    </label>
+                    <input type="date" id="pickupDate" required class="w-full bg-white text-apple-dark text-sm font-medium rounded-2xl px-4 py-3 border border-black/10 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                </div>
+
+                <!-- Return Date -->
+                <div>
+                    <label for="returnDate" class="block text-xs font-medium text-apple-muted mb-1.5 ml-1">
+                        Return Date
+                    </label>
+                    <input type="date" id="returnDate" required class="w-full bg-white text-apple-dark text-sm font-medium rounded-2xl px-4 py-3 border border-black/10 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                </div>
+
+                <!-- Find Cars CTA -->
+                <div>
+                    <button type="submit" class="w-full py-3 px-6 bg-apple-blue hover:bg-apple-blueHover text-white text-sm font-medium rounded-2xl transition-colors shadow-sm">
+                        Find Cars
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Subtle Confirmation Banner (Hidden by default) -->
+        <div id="quickBookBanner" class="hidden mt-4 bg-apple-dark text-white rounded-2xl px-5 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm shadow-md">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span id="quickBookBannerText">Showing available vehicles.</span>
+            </div>
+            <button id="clearBannerBtn" class="text-xs text-white/70 hover:text-white underline">Dismiss</button>
+        </div>
+    </section>
+
+    <!-- Fleet Showcase -->
+    <section id="fleet" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+                <h2 class="text-3xl sm:text-5xl font-semibold tracking-tight text-apple-dark">
+                    The Fleet.
+                </h2>
+                <p class="mt-3 text-base sm:text-lg text-apple-muted max-w-xl">
+                    Curated vehicles maintained to showroom standards. Pick the one that fits your journey.
+                </p>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div id="categoryFilters" class="flex flex-wrap gap-2">
+                <button data-category="All" class="filter-pill active px-4 py-2 text-xs sm:text-sm font-medium rounded-full bg-apple-dark text-white transition-colors">
+                    All
+                </button>
+                <button data-category="Compact" class="filter-pill px-4 py-2 text-xs sm:text-sm font-medium rounded-full bg-apple-gray text-apple-dark hover:bg-black/10 transition-colors">
+                    Compact
+                </button>
+                <button data-category="SUV" class="filter-pill px-4 py-2 text-xs sm:text-sm font-medium rounded-full bg-apple-gray text-apple-dark hover:bg-black/10 transition-colors">
+                    SUV
+                </button>
+                <button data-category="Sedan" class="filter-pill px-4 py-2 text-xs sm:text-sm font-medium rounded-full bg-apple-gray text-apple-dark hover:bg-black/10 transition-colors">
+                    Sedan
+                </button>
+                <button data-category="Luxury" class="filter-pill px-4 py-2 text-xs sm:text-sm font-medium rounded-full bg-apple-gray text-apple-dark hover:bg-black/10 transition-colors">
+                    Luxury
+                </button>
+                <button data-category="EV" class="filter-pill px-4 py-2 text-xs sm:text-sm font-medium rounded-full bg-apple-gray text-apple-dark hover:bg-black/10 transition-colors">
+                    EV
+                </button>
+            </div>
+        </div>
+
+        <!-- Fleet Grid -->
+        <div id="fleetGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Cards injected by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Why Choose Us (Bento Grid) -->
+    <section id="why-us" class="py-20 sm:py-28 bg-apple-gray">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <h2 class="text-3xl sm:text-5xl font-semibold tracking-tight text-apple-dark">
+                    Designed around your drive.
+                </h2>
+                <p class="mt-3 text-base sm:text-lg text-apple-muted">
+                    Every detail is engineered to remove friction from Malaysian road travel.
+                </p>
+            </div>
+
+            <!-- 4-Card Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-3xl p-8 apple-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-apple-gray flex items-center justify-center mb-6 text-apple-blue">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold tracking-tight text-apple-dark">Instant KLIA Pickup</h3>
+                        <p class="mt-2 text-sm text-apple-muted leading-relaxed">
+                            Step off your flight and unlock your car in under 3 minutes with digital key handoff at Terminal 1 &amp; 2.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-3xl p-8 apple-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-apple-gray flex items-center justify-center mb-6 text-apple-blue">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold tracking-tight text-apple-dark">Touch 'n Go &amp; RFID Ready</h3>
+                        <p class="mt-2 text-sm text-apple-muted leading-relaxed">
+                            Every vehicle comes pre-installed with active RFID and a Touch 'n Go card for seamless PLUS highway tolls.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-3xl p-8 apple-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-apple-gray flex items-center justify-center mb-6 text-apple-blue">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold tracking-tight text-apple-dark">24/7 Roadside Assist</h3>
+                        <p class="mt-2 text-sm text-apple-muted leading-relaxed">
+                            Dedicated nationwide support across Peninsular Malaysia and Langkawi, whenever you need a hand.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-3xl p-8 apple-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-apple-gray flex items-center justify-center mb-6 text-apple-blue">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold tracking-tight text-apple-dark">Transparent MYR Pricing</h3>
+                        <p class="mt-2 text-sm text-apple-muted leading-relaxed">
+                            What you see is what you pay. Comprehensive insurance and unlimited mileage included with 0% hidden fees.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimalist Apple-style Footer -->
+    <footer id="locations" class="bg-apple-white border-t border-black/5 pt-14 pb-12 px-4 sm:px-6 lg:px-8">
+        <div id="support" class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-black/5 text-xs">
+                <div>
+                    <h4 class="font-semibold text-apple-dark mb-3">Locations</h4>
+                    <ul class="space-y-2 text-apple-muted">
+                        <li>KLIA / KLIA2 Terminal</li>
+                        <li>KL Sentral Hub</li>
+                        <li>Penang International Airport</li>
+                        <li>Johor Bahru City</li>
+                        <li>Langkawi Airport</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-apple-dark mb-3">Fleet</h4>
+                    <ul class="space-y-2 text-apple-muted">
+                        <li>Compact City Cars</li>
+                        <li>Family SUVs</li>
+                        <li>Executive Sedans</li>
+                        <li>Electric &amp; Luxury</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-apple-dark mb-3">Support</h4>
+                    <ul class="space-y-2 text-apple-muted">
+                        <li>24/7 Concierge: +60 3-8888 9000</li>
+                        <li>support@irsyaddrive.my</li>
+                        <li>Insurance &amp; Coverage</li>
+                        <li>RFID &amp; Toll Guide</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-apple-dark mb-3">Irsyad Drive</h4>
+                    <ul class="space-y-2 text-apple-muted">
+                        <li>About Us</li>
+                        <li>Sustainability</li>
+                        <li>Corporate Accounts</li>
+                        <li>Terms of Service</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-apple-muted">
+                <p>Copyright &copy; 2026 Irsyad Drive Malaysia Sdn. Bhd. All rights reserved.</p>
+                <p>Kuala Lumpur &middot; Klang &middot; Penang &middot; Johor Bahru</p>
+            </div>
+                <div>
+                    <h4 class="font-semibold text-apple-dark mb-3">AuraDrive</h4>
+                    <ul class="space-y-2 text-apple-muted">
+                        <li>About Us</li>
+                        <li>Sustainability</li>
+                        <li>Corporate Accounts</li>
+                        <li>Terms of Service</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-apple-muted">
+                <p>Copyright &copy; 2026 AuraDrive Malaysia Sdn. Bhd. All rights reserved.</p>
+                <p>Kuala Lumpur &middot; Penang &middot; Johor Bahru &middot; Langkawi</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Reservation Modal -->
+    <div id="reservationModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl modal-enter relative">
+            <!-- Close Button -->
+            <button id="closeModalBtn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-apple-gray hover:bg-black/10 flex items-center justify-center text-apple-dark transition-colors" aria-label="Close modal">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Booking Form State -->
+            <div id="modalFormState">
+                <span class="text-xs font-semibold uppercase tracking-wider text-apple-blue">Instant Reservation</span>
+                <h3 id="modalCarName" class="text-2xl font-semibold tracking-tight text-apple-dark mt-1">Car Name</h3>
+                <p id="modalCarRate" class="text-sm text-apple-muted mt-0.5">RM 0 / day</p>
+
+                <form id="reservationForm" class="mt-6 space-y-4">
+                    <div>
+                        <label for="rentalDays" class="block text-xs font-medium text-apple-muted mb-1">Number of Days</label>
+                        <input type="number" id="rentalDays" min="1" max="60" value="3" required class="w-full bg-apple-gray text-apple-dark text-sm font-medium rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                    </div>
+
+                    <div>
+                        <label for="customerName" class="block text-xs font-medium text-apple-muted mb-1">Full Name</label>
+                        <input type="text" id="customerName" placeholder="e.g. Aiman Hakim" required class="w-full bg-apple-gray text-apple-dark text-sm font-medium rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                    </div>
+
+                    <div>
+                        <label for="customerEmail" class="block text-xs font-medium text-apple-muted mb-1">Email Address</label>
+                        <input type="email" id="customerEmail" placeholder="aiman@example.com" required class="w-full bg-apple-gray text-apple-dark text-sm font-medium rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                    </div>
+
+                    <!-- Price Summary -->
+                    <div class="bg-apple-gray rounded-2xl p-4 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-apple-muted">Total (0% hidden fees)</p>
+                            <p class="text-xs text-emerald-600 font-medium mt-0.5">Includes insurance &amp; RFID</p>
+                        </div>
+                        <span id="modalTotalPrice" class="text-xl font-semibold text-apple-dark">RM 0</span>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-apple-blue hover:bg-apple-blueHover text-white text-sm font-medium rounded-full transition-colors shadow-sm">
+                        Confirm Reservation
+                    </button>
+                </form>
+            </div>
+
+            <!-- Booking Confirmation State -->
+            <div id="modalSuccessState" class="hidden text-center py-6">
+                <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-apple-dark">You're all set.</h3>
+                <p id="confirmationDetails" class="mt-2 text-sm text-apple-muted leading-relaxed">
+                    Your reservation has been confirmed.
+                </p>
+                <button id="doneModalBtn" class="mt-6 px-8 py-2.5 bg-apple-dark text-white text-sm font-medium rounded-full hover:bg-black/80 transition-colors">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Fleet Data
+        const fleetData = [
+            {
+                id: 'myvi',
+                name: 'Perodua Myvi',
+                category: 'Compact',
+                tagline: 'Malaysia’s favorite agile city cruiser.',
+                rate: 110,
+                specs: ['5 Seats', 'Auto', 'Fuel Efficient'],
+                image: 'https://placehold.co/600x380/f5f5f7/1d1d1f?text=Perodua+Myvi'
+            },
+            {
+                id: 'x70',
+                name: 'Proton X70',
+                category: 'SUV',
+                tagline: 'Refined comfort for highway & family trips.',
+                rate: 240,
+                specs: ['5 Seats', '7-Speed DCT', 'ADAS Safety'],
+                image: 'https://placehold.co/600x380/f5f5f7/1d1d1f?text=Proton+X70'
+            },
+            {
+                id: 'civic',
+                name: 'Honda Civic RS',
+                category: 'Sedan',
+                tagline: 'Sporty dynamics with executive presence.',
+                rate: 290,
+                specs: ['5 Seats', 'Turbo CVT', 'Apple CarPlay'],
+                image: 'https://placehold.co/600x380/f5f5f7/1d1d1f?text=Honda+Civic+RS'
+            },
+            {
+                id: 'vellfire',
+                name: 'Toyota Vellfire',
+                category: 'Luxury',
+                tagline: 'First-class lounge on wheels.',
+                rate: 550,
+                specs: ['7 Seats', 'Captain Chairs', 'Dual Sunroof'],
+                image: 'https://placehold.co/600x380/f5f5f7/1d1d1f?text=Toyota+Vellfire'
+            },
+            {
+                id: 'model3',
+                name: 'Tesla Model 3',
+                category: 'EV',
+                tagline: 'Pure electric performance, zero emissions.',
+                rate: 480,
+                specs: ['5 Seats', '513km Range', 'Autopilot'],
+                image: 'https://placehold.co/600x380/f5f5f7/1d1d1f?text=Tesla+Model+3'
+            },
+            {
+                id: 'x50',
+                name: 'Proton X50',
+                category: 'SUV',
+                tagline: 'Compact SUV built for urban adventures.',
+                rate: 190,
+                specs: ['5 Seats', 'Turbo', '360° Camera'],
+                image: 'https://placehold.co/600x380/f5f5f7/1d1d1f?text=Proton+X50'
+            }
+        ];
+
+        // State
+        let activeCategory = 'All';
+        let selectedCar = null;
+        let calculatedDays = 3;
+
+        // DOM Elements
+        const fleetGrid = document.getElementById('fleetGrid');
+        const filterButtons = document.querySelectorAll('.filter-pill');
+        const quickBookForm = document.getElementById('quickBookForm');
+        const quickBookBanner = document.getElementById('quickBookBanner');
+        const quickBookBannerText = document.getElementById('quickBookBannerText');
+        const clearBannerBtn = document.getElementById('clearBannerBtn');
+        const pickupDateInput = document.getElementById('pickupDate');
+        const returnDateInput = document.getElementById('returnDate');
+
+        // Modal Elements
+        const modal = document.getElementById('reservationModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const doneModalBtn = document.getElementById('doneModalBtn');
+        const modalFormState = document.getElementById('modalFormState');
+        const modalSuccessState = document.getElementById('modalSuccessState');
+        const modalCarName = document.getElementById('modalCarName');
+        const modalCarRate = document.getElementById('modalCarRate');
+        const rentalDaysInput = document.getElementById('rentalDays');
+        const modalTotalPrice = document.getElementById('modalTotalPrice');
+        const reservationForm = document.getElementById('reservationForm');
+        const confirmationDetails = document.getElementById('confirmationDetails');
+
+        // Initialize Default Dates (Today & +3 days)
+        function initDates() {
+            const today = new Date();
+            const returnDay = new Date();
+            returnDay.setDate(today.getDate() + 3);
+
+            pickupDateInput.value = today.toISOString().split('T')[0];
+            returnDateInput.value = returnDay.toISOString().split('T')[0];
+        }
+
+        // Render Fleet Cards
+        function renderFleet(category) {
+            const filtered = category === 'All'
+                ? fleetData
+                : fleetData.filter(car => car.category === category);
+
+            fleetGrid.innerHTML = filtered.map(car => `
+                <div class="bg-apple-gray rounded-3xl p-6 sm:p-7 apple-card flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-medium text-apple-muted">${car.category}</span>
+                            <span class="text-xs font-semibold text-apple-dark bg-white px-2.5 py-1 rounded-full shadow-sm">
+                                RM ${car.rate}/day
+                            </span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-apple-dark">${car.name}</h3>
+                        <p class="mt-1 text-sm text-apple-muted">${car.tagline}</p>
+
+                        <div class="my-5 rounded-2xl overflow-hidden bg-white">
+                            <img src="${car.image}" alt="${car.name}" class="w-full h-44 object-cover" onerror="this.src='https://placehold.co/600x380/ffffff/1d1d1f?text=${encodeURIComponent(car.name)}'">
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            ${car.specs.map(spec => `
+                                <span class="text-xs text-apple-dark/80 bg-white/80 px-3 py-1 rounded-full">${spec}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="openReservationModal('${car.id}')" class="w-full py-2.5 px-5 bg-apple-blue hover:bg-apple-blueHover text-white text-sm font-medium rounded-full transition-colors">
+                        Reserve
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Category Filter Clicks
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeCategory = btn.dataset.category;
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-apple-dark', 'text-white');
+                    b.classList.add('bg-apple-gray', 'text-apple-dark');
+                });
+                btn.classList.remove('bg-apple-gray', 'text-apple-dark');
+                btn.classList.add('bg-apple-dark', 'text-white');
+                renderFleet(activeCategory);
+            });
+        });
+
+        // Quick-Book Form Submit
+        quickBookForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const location = document.getElementById('pickupLocation').value;
+            const start = new Date(pickupDateInput.value);
+            const end = new Date(returnDateInput.value);
+
+            const diffTime = end - start;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            calculatedDays = diffDays > 0 ? diffDays : 1;
+
+            quickBookBannerText.textContent = `Showing available cars at ${location} (${calculatedDays} ${calculatedDays === 1 ? 'day' : 'days'}: ${pickupDateInput.value} to ${returnDateInput.value}).`;
+            quickBookBanner.classList.remove('hidden');
+
+            document.getElementById('fleet').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        clearBannerBtn.addEventListener('click', () => {
+            quickBookBanner.classList.add('hidden');
+        });
+
+        // Modal Functions
+        window.openReservationModal = function(carId) {
+            selectedCar = fleetData.find(c => c.id === carId);
+            if (!selectedCar) return;
+
+            modalCarName.textContent = selectedCar.name;
+            modalCarRate.textContent = `RM ${selectedCar.rate} / day`;
+            rentalDaysInput.value = calculatedDays;
+            updateModalTotal();
+
+            modalFormState.classList.remove('hidden');
+            modalSuccessState.classList.add('hidden');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        function updateModalTotal() {
+            if (!selectedCar) return;
+            const days = Math.max(1, parseInt(rentalDaysInput.value, 10) || 1);
+            const total = days * selectedCar.rate;
+            modalTotalPrice.textContent = `RM ${total.toLocaleString()}`;
+        }
+
+        rentalDaysInput.addEventListener('input', updateModalTotal);
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        doneModalBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const days = Math.max(1, parseInt(rentalDaysInput.value, 10) || 1);
+            const total = days * selectedCar.rate;
+            const location = document.getElementById('pickupLocation').value;
+
+            confirmationDetails.textContent = `Thank you, ${name}. Your ${selectedCar.name} for ${days} ${days === 1 ? 'day' : 'days'} (RM ${total.toLocaleString()}) at ${location} is confirmed. A digital key has been sent to ${email}.`;
+
+            modalFormState.classList.add('hidden');
+            modalSuccessState.classList.remove('hidden');
+            reservationForm.reset();
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Initialize on Load
+        window.onload = function() {
+            initDates();
+            renderFleet(activeCategory);
+        };
+    </script>
+</body>
+</html>
